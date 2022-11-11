@@ -13,9 +13,9 @@ import (
 )
 
 var (
-	in      = flag.String("test", "", "the path to a test file")
-	out     = flag.String("out", "", "result output path")
-	bFactor = flag.Uint("b", 500, "batching size")
+	in        = flag.String("in", "", "sql dump input path")
+	out       = flag.String("out", "", "batched sql dump output path")
+	batchSize = flag.Uint("b", 500, "batching size")
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 		log.Fatalf("failed to create output file: %s\n", err)
 	}
 
-	err = batchQueries(string(f), outFile, int(*bFactor))
+	err = batchQueries(string(f), outFile, int(*batchSize))
 	if err != nil {
 		log.Fatalf("failed to create output file: %s\n", err)
 	}
